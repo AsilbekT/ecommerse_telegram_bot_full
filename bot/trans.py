@@ -1,0 +1,186 @@
+from .models import BotUsers
+
+def t(word, message=None, user=None) -> object:
+    """
+
+    :rtype: object
+    """
+    if message is not None:
+        userModel = BotUsers.objects.get(user_id=message['from']['id'])
+        lang = userModel.lang
+    elif user is not None:
+        userModel = user
+        lang = userModel.lang
+    else:
+        lang = 'uz'
+
+    words_uz = {
+        "Paketlar narxi" : "Paketlar narxi",
+        'qabul_qilindi': "Sizning buyurtmangiz qabul qilindi✅",
+        'phone_number_warning': "❌ Iltimos, telefon raqamingizni quyidagi farmatda (+998990000000) yoki telegramdagi telefon nomerni ulashish tugmasi orqali kiritin", 
+        'Branches': "👪 Bizning filiallarimiz",
+        'Branch ni tanglang': "Filiallarimizdan birini tanlang",
+        "yolda": "Sizni buyurtmangiz yo'lda🚗",
+        "yetqazib_berildi": "Sizning buyurtmangiz yetkazib berildi. Bizga sizning fikringiz kerak. Iltimos izoh qoldiring😇",
+        "Menular": "Menular",
+        "Bizni karta raqamimiz": "Bizni karta raqamimiz",
+        "Davom etish": "Davom etish 🔜",
+        "To'lash turini kiriting": "💰 To'lash turini kiriting",
+        "Manzilingizni kiriting": "Geolakatsiyani kiriting",
+        "Narxi": "Narxi",
+        'Tarkibi': 'Tarkibi',
+        'orqaga': '🔙 Orqaga',
+        "Naqt pul": "💵 Naqt pul",
+        'Azimov Tohir': 'Azimov Tohir',
+        "Karta orqali to'lash": "💳 Karta orqali to'lash",
+        "Iltimos manzilingizni yozib qoldiring": "Iltimos manzilingizni yozib qoldiring yoki izoh qoldiring",
+        "asosiy oynaga qaytish": "❗ Asosiy oynaga qaytish",
+        "Joylashuvni jo'natish": "📍 Geolokatsiya",
+        "dastavka": "🚗 Yetkazib berish",
+        "olib ketaman": "🏃🏻 Olib ketaman",
+        "Buyurtmani o'zingiz olib ketasizmi yoki etkazib berishsinmi": "Buyurtmani o'zingiz olib ketasizmi 🏃🏻 yoki etkazib berishsinmi 🚙",
+        "quyidagilardan birini tanlang": "Quyidagilardan birini tanlang",
+        'contact': "📲 Telefon raqam yuborish",
+        "Mobil raqamingizni kiriting": "Telefon raqamingizni quyidagi tarzda 👇 yuboring yoki kiriting: +998 ** *** ****",
+        "Ismingizni kiriting": "Ism, familiyangizni kiriting",
+        'Familyangizni kiriting': "Familyangizni kiriting",
+        'Register': "➕ Ro'yhatdan o'tish / Регистрация",
+        'uz til': "🇺🇿 O'zbekcha",
+        'ru til': "🇷🇺 Русский",
+        'Tilni tanlang uz/ru': "Tilni tanlang: / Выберите язык",
+        'welcome': "Xush kelibsiz",
+        "Buyurtma qilish": "🛒 Buyurtma qilish",
+        "Mening buyurtmalarim": "📖 Mening buyurtmalarim",
+        "Telefon orqali aloqa": "📞 Telefon orqali aloqa",
+        "Sozlash": "⚙ Sozlash",
+        "Ansor oilasi": "👨‍👩‍👧‍👦 Aksiyalar",
+        'savatcha': '🛒 Savatcha',
+        'Savatcha': '📥 Savatcha',
+        "O'zbekcha": "🇺🇿 O'zbekcha",
+        "Ruscha": "🇷🇺 Ruscha",
+        "Пиццы": '🍕 Пиццы',
+        "Fast food": "🍔 Fast food",
+        "Супы (первое блюдо)": "🍲 Супы (первое блюдо)",
+        "Салаты": "🥗 Салаты",
+        "Турецкая кухня": "🍛 Турецкая кухня",
+        "Европейская кухня": "🥘 Европейская кухня",
+        "Завтраки": "🍮 Завтраки",
+        "Десерты": "🍰 Десерты",
+        "Barcha menular": "📕 Barcha menular",
+        "Telefon": "📞Telefon",
+        "Til": "Til 🇺🇿 🇷🇺",
+        "checkout": "Davom etamizmi😉",
+        "Savatni bo'shatish": "🗑 Savatni bo'shatish",
+        "Biz bilan bog'laning": "Biz bilan bog'laning",
+        "Menuni tanlang": "Menuni tanlang",
+        "Barcha Menularni Korish": "Barcha Menularni Korish",
+        "Mahsulot narxi": "Mahsulot narxi",
+        "Yetkazib berish narxi": "Yetkazib berish narxi",
+        "Jami": "Jami",
+        "feedback_done": "✅ Sizning izohingiz qabul qilindi",
+        "so'm": "UZS",
+        "narxi": "Narxi",
+        "ta": "ta",
+
+        "Быстрая доставка": "Tez yetkazib berildi 🚀",
+        "Вежливый курьер": "Muloyim kurer🤗",
+        "Оператор молодец": "Yaxshi operator👍",
+        "Великолепный вкус": "Ajoyib ta'm 😋",
+        "savatchada": "Savatchada",
+        "Eltish vaqti": "⏳ Eltish vaqti",
+        "Hali hech narsa yo'q": "Hali hech narsa yo'q",
+        'Botimizdan foydalanganingiz uchun rahmat': 'Botimizdan foydalanganiz uchun rahmat, hodimlarimiz tez orada siz bilan boglanishadi',
+        "Yangi mahsulot qo'shish": "🆕 Yangi mahsulot qo'shish"
+
+    }
+
+    words_ru = {
+        "Paketlar narxi" : "Цена пакета",
+        'qabul_qilindi': "Ваш заказ успешно принят✅",
+        'phone_number_warning': "❌ Пожалуйста, введите свой номер телефона в виде (+998990000000) или через кнопку поделиться номером телефона в Telegram", 
+        'Branches': "👪 Наши филиалы",
+        'Branch ni tanglang': "Выберите наши филиалы",
+        "feedback_done": "✅ Ваш отзыв был принят",
+        "yolda": "Ваш заказ уже в пути🚗",
+        "qabul_qilindi": "Спасибо, ваш заказ подтвержден. Он будет доставлен в течение 45 минут если вы находитесь по городу Ферганы.",
+        "yetqazib_berildi": "Ваш заказ был доставлен. Нам важно ваше мнение. Пожалуйста оставьте свой отзыв😇",
+        "Menular": "Меню",
+        'orqaga': '🔙 Назад',
+        "Kechirasiz hozir bu maxsulot yo'q": "Извините, этот продукт сейчас недоступен",
+        "Bizni karta raqamimiz": 'Номер нашей карты',
+        "Manzilingizni kiriting": "Введите геолокацию",
+        "To'lash turini kiriting": "💰 Выберите способ оплаты",
+        "Davom etish": "Продолжить 🔜",
+        "Narxi": "Цена",
+        "Tarkibi": "Состав",
+        "Naqt pul": "💵 Наличные",
+        "Karta orqali to'lash": "💳 Оплата картой",
+        "Iltimos manzilingizni yozib qoldiring": "Напишите свой адрес либо оставьте комментарии к заказу",
+        "asosiy oynaga qaytish": "❗️ Вернуться в главное окно",
+        "Joylashuvni jo'natish": "📍 Геолокация",
+        "dastavka": "🚗 Доставка",
+        "olib ketaman": "🏃🏻 Самовывоз",
+        "Buyurtmani o'zingiz olib ketasizmi yoki etkazib berishsinmi": "Заберете свой заказ самостоятельно 🏃🏻 или выберите доставку 🚙",
+        "quyidagilardan birini tanlang": 'Выберите один из следующих',
+        'contact': "📲 Отправьте свой номер телефона",
+        "Mobil raqamingizni kiriting": "Отправьте или введите свой номер телефона 👇  в виде: +998 ** *** ****",
+        "Ismingizni kiriting": 'Введите ваше имя и фамилию',
+        'Familyangizni kiriting': 'Введите вашу фамилию',
+        'Tilni tanlang uz/ru': "Tilni tanlang: / Выберите язык",
+        "Buyurtma qilish": "🛒 Заказать",
+        'welcome': "Xush kelibsiz ru",
+        "Пиццы": '🍕 Пиццы',
+        "Fast food": "🍔 Fast food",
+        "Супы (первое блюдо)": "🍲 Супы (первое блюдо)",
+        "Салаты": "🥗 Салаты",
+        "Турецкая кухня": "🍛 Турецкая кухня",
+        "Европейская кухня": "🥘 Европейская кухня",
+        "Завтраки": "🍮 Завтраки",
+        "Десерты": "🍰 Десерты",
+        'Muloqot tili': 'Язык общения',
+        'Telefon nomer': 'Телефонный номер',
+        'Ruscha': "🇷🇺 Русский",
+        "O'zbekcha": "🇺🇿 Узбекский",
+        "Telefon": "📞Телефон",
+        "Til": "Язык 🇺🇿 🇷🇺",
+        "Mening buyurtmalarim": "📖 Мои заказы",
+        "Telefon orqali aloqa": "📞 Телефонная связь",
+        "Sozlash": "⚙ Настройки",
+        "Ansor oilasi": "👨‍👩‍👧‍👦 Акции",
+        'savatcha': 'Корзина',
+        'Savatcha': '📥 Корзина',
+        "Barcha menular": "📕 Просмотреть меню",
+        "Savatni bo'shatish": "🗑 Очистить корзину",
+        "checkout": "Продолжим😉",
+        "Biz bilan bog'laning": "Свяжитесь с нами",
+        "Menuni tanlang": "Выберите меню",
+        "Barcha Menularni Korish": "Просмотреть все меню",
+        "Mahsulot narxi": "Цена продукта",
+        "Yetkazib berish narxi": "Стоимость доставки",
+        "Jami": "Все",
+        "savatchada": "В корзине",
+        "Eltish vaqti": "⏳ Срок поставки",
+        "so'm": "UZS",
+        'ta': ' ',
+        "narxi": "Цена",
+        "Быстрая доставка": "Быстрая доставка 🚀",
+        "Вежливый курьер": "Вежливый курьер 🤗",
+        "Оператор молодец": "Оператор молодец 👍",
+        "Великолепный вкус": "Великолепный вкус 😋",
+        'Azimov Tohir': 'Азимов Тохир',
+        "Hali hech narsa yo'q": "Пока ничего",
+        "nima boldi": "Опишите что случилось?(Text)",
+        'Botimizdan foydalanganingiz uchun rahmat': 'Спасибо за использование нашего бота, наши сотрудники скоро с вами свяжутся',
+        "Yangi mahsulot qo'shish": "🆕 Добавить новый товар"
+    }
+    if lang == 'ru':
+        if word in words_ru.keys():
+            return words_ru[word]
+        else:
+            return word
+
+    if lang == 'uz':
+        if word in words_uz.keys():
+            return words_uz[word]
+        else:
+            return word

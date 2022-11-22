@@ -1,0 +1,12 @@
+Django
+django-ckeditor
+django-crispy-forms
+geographiclib
+geopy
+gevent
+Pillow
+redis
+requests
+djangorestframework
+django-adminlte-3
+pyrebase

@@ -1,0 +1,12 @@
+Statistics
+-------------
+daily
+weekly
+monthly
+yearly
+all
+-------------
+orders
+earnings
+
+according to items

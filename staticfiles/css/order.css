@@ -1,0 +1,17 @@
+body{
+    padding: 10px 0;
+    margin: 0;
+    box-sizing: border-box;
+    background-color:#212529;
+}
+
+.btn,
+.btn:hover{
+    color: #000000;
+    outline: none;
+}
+
+.btn{
+    background-color: white;
+}
+
